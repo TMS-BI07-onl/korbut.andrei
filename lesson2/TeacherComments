@@ -1,0 +1,15 @@
+Well done!
+
+1.
+d) -1
+You probably deleted this by accident, but there is no answer.
+
+4.
+b)
+Pay attention to select list requirements.
+Expected result: SELECT TOP 3 *
+e)
+I expected the first query as the correct answer. Color is not required in the select list, you were right. For test purposes you can select it to see the results. But in the final query it's not needed.
+Actually, even 'distinct' wasn't required. For now it seems, that it didn't affect the results, but it can be so in the future. So pay attention when it asked to show UNIQUE rows.
+
+Mark: 9.
