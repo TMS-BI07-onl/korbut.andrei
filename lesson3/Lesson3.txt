@@ -1,0 +1,87 @@
+--TASK 2
+Решите на базе данных AdventureWorks2017 следующие задачи (для поиска ключей можно использовать схему БД ). 
+
+--A)
+--Вывести список цен в виде текстового комментария, основанного на диапазоне цен для продукта:
+--StandardCost равен 0 или не определен – ‘Not for sale’  
+--StandardCost больше 0, но меньше 100 – ‘<$100’ 
+--StandardCost больше или равно 100, но меньше 500 - ‘ <$500' 
+--Иначе - ‘ >= $500'
+
+Вывести имя продукта и новое поле PriceRange.
+
+--Code
+SELECT StandardCost, name,
+	CASE WHEN StandardCost = 0 OR StandardCost IS NULL  THEN 'Not for sale'
+	     WHEN StandardCost > 0 AND StandardCost < 100 THEN '$100'
+		 WHEN StandardCost >= 10 AND StandardCost < 500 THEN '$500'
+		ELSE '>= $500'
+	END PriceRange
+FROM AdventureWorks2017.Production.Product  
+
+--B)Найти ProductID, BusinessEntityID и имя поставщика продукции из Purchasing.ProductVendor и Purchasing.Vendor, 
+--где StandardPrice больше $10. Также в имени вендора должна присутствовать (вне зависимости от положения) 
+--буква X или имя должно начинаться на букву N.
+
+--Code variant 1
+SELECT pv.ProductID, pv.BusinessEntityID, v.Name as [Vendor Name]
+FROM AdventureWorks2017.Purchasing.Vendor v, AdventureWorks2017.Purchasing.ProductVendor pv
+WHERE v.Name LIKE '%X%' OR Name LIKE 'N%'
+	AND pv.StandardPrice > 10 
+
+--Code variant 2
+SELECT pv.ProductID, pv.BusinessEntityID, v.Name as [Vendor Name]
+FROM AdventureWorks2017.Purchasing.Vendor v
+	JOIN AdventureWorks2017.Purchasing.ProductVendor pv
+	ON pv.[BusinessEntityID] = v.[BusinessEntityID]
+WHERE v.Name LIKE '%X%' OR Name LIKE 'N%'
+	AND pv.StandardPrice > 10 
+
+--B)Найти имена всех вендоров, продукция которых не продавалась за всё время. 
+--Необходимо использовать следующую схему соединения таблиц Purchasing.ProductVendor и Purchasing.Vendor:
+
+SELECT DISTINCT Name as [Vendors without sales], LastReceiptDate
+FROM AdventureWorks2017.Purchasing.Vendor v
+	LEFT JOIN AdventureWorks2017.Purchasing.ProductVendor pv
+	ON pv.[BusinessEntityID] = v.[BusinessEntityID]
+WHERE LastReceiptDate IS NULL 
+
+--TASK 2. Решить следующие задачи для тестовой базы данных (схема ниже):
+--A. Найдите производителей, препараты которых не продавались в 2019 году 
+--(подсказка: для выделения года из даты надо использовать одну из функций для работы с датами).
+
+SELECT fp.name, 
+FROM Фирмы-производители fp
+	JOIN Фармпрепараты p
+	ON fp.ID = p.[ID фирмы]
+		JOIN Продажи s
+		ON p.ID = s.[ID фармпрепарата]
+			JOIN Кассовые чеки cr
+			ON s.[ID чека] = cr.[ID]
+			WHERE YEAR(cr.Дата) != 2019
+
+--B. Выведите увеличенную в 2 раза цену препаратов типа А. 
+SELECT Цена * 2 as [(Price)x2]
+FROM Фармпрепараты
+WHERE [id типа] = 'A'
+
+--C. Найдите производителей и кол-во фармпрепаратов для кажого из них, где препарат не относится к типу А.
+SELECT DISTINCT fp.name, COUNT(p.Название)
+FROM Фирмы-производители fp
+	JOIN Фармпрепараты p
+	ON fp.ID = p.[ID фирмы]
+		JOIN Типы фармпрепаратов pt
+		ON p.[ID типа] = pt.[ID]
+		WHERE pt.[Тип] != A
+GROUP BY fp.name
+
+--D. Вывести название аптеки и названия фармпрепаратов, которые в ней продавались по субботам.
+SELECT sp.Название, DISTINCT p.Название
+FROM Фармпрепараты p
+	JOIN Продажи s
+	ON s.[ID фармпрепарата] = p.[ID]
+		JOIN Кассовые чеки cr
+		ON s.[ID чека] = cr.[ID]
+		WHERE DATENAME(weekday, cr.Дата) = 'Sunday'
+		JOIN Аптечные пункты sp
+		ON s.[ID аптечного пункта] = sp.[ID]
