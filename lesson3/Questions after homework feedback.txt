@@ -63,9 +63,10 @@ WHERE v.Name LIKE '%X%' OR Name LIKE 'N%'
 	AND pv.StandardPrice > 10 
 --And to correct it we always need to unite all logically grouped 'OR' clauses by (), right?
 
---KATE'S ANSWER
-I've just retest both solutions and it returns totally same results. While talking about this on lection, I said that parentheses don't have any real logic, but here I've made a mistake.
-Thanks for pointing me to that!
+--KATE'S ANSWER 
+I've just retest both solutions and it returns totally same results. 
+But the reason of this is that you placed StandardPrice condition at the end. If your solution was "WHERE pv.StandardPrice > 10 AND v.Name LIKE '%X%' OR Name LIKE 'N%'", it would show 36 rows, which is not correct. So, adding parentheses will help you to avoid tricky situations.
+I'm deleting -0.5 for this task, 'cause the answer is correct. But I guess, that you did that accidently. :)
 
 
 --C. Найдите производителей и кол-во фармпрепаратов для кажого из них, где препарат не относится к типу А.
