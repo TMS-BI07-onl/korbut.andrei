@@ -1,0 +1,69 @@
+--B)Найти имена всех вендоров, продукция которых не продавалась за всё время. 
+--Необходимо использовать следующую схему соединения таблиц Purchasing.ProductVendor и Purchasing.Vendor:
+
+--Andrew' query
+SELECT DISTINCT Name as [Vendors without sales], LastReceiptDate
+FROM AdventureWorks2017.Purchasing.Vendor v
+	LEFT JOIN AdventureWorks2017.Purchasing.ProductVendor pv
+	ON pv.[BusinessEntityID] = v.[BusinessEntityID]
+WHERE pv.LastReceiptDate IS NULL 
+
+--Kate's response
+--Correct answer:
+SELECT DISTINCT Name
+FROM Purchasing.Vendor v 
+		LEFT JOIN Purchasing.ProductVendor pv ON v.BusinessEntityID=pv.BusinessEntityID
+WHERE pv.BusinessEntityID IS NULL
+--Pay attention to required columns in the select list.
+--Also, Date can be NULL just by the data rules. That's why better way is to use id.
+
+--Andrew's question:
+--So I'm a little bit confused with this task. 
+--Based on the business idea of the tables Vendor is a list of companies aka vendors, ProductVendor is a list of all products of all companies.
+--In ProductVendor there are 2 columns LastReceiptCost and LastReceiptDate. If they have values logically it means that this product has been sold at least once,
+--meaning that there's a date when it was sold and last cost of it that it was sold for. That's why I selected this clause (WHERE LastReceiptDate IS NULL )
+--aka the result should show companies that have products that were never sold.
+--But you suggest that since date's value can be Null, it's better to exclude BusinessEntityID, but I'm not sure of the business logic in it.
+--If we apply clause that you've written (WHERE pv.BusinessEntityID IS NULL) - I'm not even sure how it works and what's the idea in it?
+--Doesn't absence of ID in ProductVendor table implies that listed product doesn't have relation to any company and that's not what we are trying to look for in this task?
+
+--b) -0.5
+--Найти ProductID, BusinessEntityID и имя поставщика продукции из Purchasing.ProductVendor и Purchasing.Vendor, 
+--где StandardPrice больше $10. Также в имени вендора должна присутствовать (вне зависимости от положения) 
+--буква X или имя должно начинаться на букву N.
+
+--Kate's response: Correct answer:
+SELECT ProductID, 
+		pv.BusinessEntityID, 
+		Name
+FROM Purchasing.ProductVendor pv 
+		JOIN Purchasing.Vendor v ON pv.BusinessEntityID=v.BusinessEntityID
+WHERE StandardPrice>10 
+		AND (Name LIKE '%X%'
+			OR 
+			Name LIKE 'N%')
+--By the reason of missing parentheses you will have more rows in the result set.
+
+--Andrew's question:
+--So my query clause looked like this
+WHERE v.Name LIKE '%X%' OR Name LIKE 'N%'
+	AND pv.StandardPrice > 10 
+--And to correct it we always need to unite all logically grouped 'OR' clauses by (), right?
+
+
+--C. Найдите производителей и кол-во фармпрепаратов для кажого из них, где препарат не относится к типу А.
+SELECT DISTINCT fp.name, COUNT(p.Название)
+FROM Фирмы-производители fp
+	JOIN Фармпрепараты p
+	ON fp.ID = p.[ID фирмы]
+		JOIN Типы фармпрепаратов pt
+		ON p.[ID типа] = pt.[ID]
+		WHERE pt.[Тип] != A
+GROUP BY fp.name
+--Kate's comment:
+--It would be better not to base count on the name. Name could include null. You can use id (because it's pk) or 1.
+
+--Andrew's question:
+--If we are talking about real life task, we would still count Null in names because other data is filled in and it implies that just name is 
+--for whatever reason is missing and we still need to consider it as a product line? For some reason I thought if there's a name - then it's legit product, 
+--but if there's not, then we don't need it. But thinking about NULLs now, it probably makes sense.
