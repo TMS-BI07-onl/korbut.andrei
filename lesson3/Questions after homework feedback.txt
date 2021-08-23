@@ -27,6 +27,19 @@ WHERE pv.BusinessEntityID IS NULL
 --If we apply clause that you've written (WHERE pv.BusinessEntityID IS NULL) - I'm not even sure how it works and what's the idea in it?
 --Doesn't absence of ID in ProductVendor table implies that listed product doesn't have relation to any company and that's not what we are trying to look for in this task?
 
+--KATE'S ANSWER
+In my understanding, table ProductVendor stores data about only sold products. So, if any product haven't been sold yet, there is no rows with such product_id.
+It means that vendors that have linked rows in the ProductVendor table already have sales.
+Where clause works like this:
+v.BusinessEntityID  	v.Name		pv.BusinessEntityID	pv.Product_id	pv.LastReceiptDate
+1			A		1			1		2021-01-01
+2			B		NULL			NULL		NULL
+3			C		3			2		NULL
+BusinessEntityID=1 from Vendors has alignment in the ProductVendor table, because it has sold product.
+BusinessEntityID=2 from Vendors doesn't have alignment in the ProductVendor table, because it has no sold products.
+And BusinessEntityID=3 from Vendors has alignment in the ProductVendor table, it has sold product, but by some mistake Date is NULL.
+Final result should show only BusinessEntityID=2.
+
 --b) -0.5
 --Найти ProductID, BusinessEntityID и имя поставщика продукции из Purchasing.ProductVendor и Purchasing.Vendor, 
 --где StandardPrice больше $10. Также в имени вендора должна присутствовать (вне зависимости от положения) 
@@ -50,6 +63,10 @@ WHERE v.Name LIKE '%X%' OR Name LIKE 'N%'
 	AND pv.StandardPrice > 10 
 --And to correct it we always need to unite all logically grouped 'OR' clauses by (), right?
 
+--KATE'S ANSWER
+I've just retest both solutions and it returns totally same results. While talking about this on lection, I said that parentheses don't have any real logic, but here I've made a mistake.
+Thanks for pointing me to that!
+
 
 --C. Найдите производителей и кол-во фармпрепаратов для кажого из них, где препарат не относится к типу А.
 SELECT DISTINCT fp.name, COUNT(p.Название)
@@ -67,3 +84,6 @@ GROUP BY fp.name
 --If we are talking about real life task, we would still count Null in names because other data is filled in and it implies that just name is 
 --for whatever reason is missing and we still need to consider it as a product line? For some reason I thought if there's a name - then it's legit product, 
 --but if there's not, then we don't need it. But thinking about NULLs now, it probably makes sense.
+
+--KATE'S ANSWER
+NULLS can actually have different meanings in the real life. If it's a missing data, then we shouldn't add it to the result set. But NULL can also be a default option in replacing some bad value in the name. As usually, it all depends on business logic.
