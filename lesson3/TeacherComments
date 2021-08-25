@@ -5,19 +5,6 @@ a)
 Technically, while writing second and third condition for this task you could leave only <100 and <500, because all conditions is being checked in the written order. It's just for your information. :)
 Also, you missprinted third condition.
 
-b) -0.5
-Correct answer:
-SELECT ProductID, 
-		pv.BusinessEntityID, 
-		Name
-FROM Purchasing.ProductVendor pv 
-		JOIN Purchasing.Vendor v ON pv.BusinessEntityID=v.BusinessEntityID
-WHERE StandardPrice>10 
-		AND (Name LIKE '%X%'
-			OR 
-			Name LIKE 'N%')
-By the reason of missing parentheses you will have more rows in the result set.
-
 с)-0.5
 Correct answer:
 SELECT DISTINCT Name
