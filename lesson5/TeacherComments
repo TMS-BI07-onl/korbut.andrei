@@ -1,0 +1,19 @@
+Well done!
+
+8.
+If I could do so, I would add points for Spiderman :)
+
+11. -1
+It's not a function at all, it's just a parameter.
+One of possible solutions:
+CREATE FUNCTION CelsiusToFarenheit (@Cels decimal(4,1))
+RETURNS decimal(4,1)
+BEGIN
+	DECLARE @Far decimal(4,1)
+	SET @Far=@Cels*9/5+32
+	RETURN @Far
+END
+
+SELECT [dbo].[CelsiusToFarenheit](40) AS Temp_F
+
+Mark: 9.
