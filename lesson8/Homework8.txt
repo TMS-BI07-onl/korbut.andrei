@@ -1,8 +1,4 @@
---Катя, привет. Что-то я переоценил собственные возможности и вместо запланированных 20 минут на написание скрипта на это пошли часы.
---Как обычно в процессе начали валиться бредовые ошибки и пока в них разбирался и пытался понять что не так время улетало.
---Запустил этот скрипт, он работал минуты 3, я уже подумал надо его принудительно останавливать, но он отработал.
---В итоге у меня получилось 20 млн сгенерированных записей, я не понял почему, если в условии стоит ограничение Counter < SetNumber.
---Высылаю сегодня этот вариант, если ты его еще к тому времени не посмотришь, то попробую завтра посмотреть что с этим делать.
+--Сделал скрипт рабочим
 
 GO
 CREATE PROCEDURE common.uspRandomPeopleGenerator
@@ -12,12 +8,22 @@ AS
 WHILE @Counter < @RequiredNumberOfPeople
 BEGIN
 INSERT INTO [dbo].[People] (first_name, last_name)
-SELECT TOP (@RequiredNumberOfPeople)
+SELECT TOP 1
       p1.[first_name],
 	  p2.[last_name]
 FROM [dbo].[People] p1
 CROSS JOIN
 [dbo].[People] p2
+ORDER BY NEWID()
     SET @Counter = @Counter + 1 
     END
 GO
+
+EXEC common.uspRandomPeopleGenerator @RequiredNumberOfPeople = 1050, @Counter = 1000
+
+SELECT *
+FROM [dbo].[People] 
+
+DROP TABLE [dbo].[People]
+
+
