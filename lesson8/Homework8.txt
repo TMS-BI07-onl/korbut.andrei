@@ -1,5 +1,4 @@
---Сделал скрипт рабочим
-
+--Скрипт для генерации N количества людей для таблицы с уже существующим набором имен и фамилий
 GO
 CREATE PROCEDURE common.uspRandomPeopleGenerator
 	@RequiredNumberOfPeople int,
@@ -26,4 +25,131 @@ FROM [dbo].[People]
 
 DROP TABLE [dbo].[People]
 
+--Создание БД
+CREATE TABLE dbo.Race (
+id int identity(1,1),
+CompetitionID int NOT NULL,
+SwimmingTypeID int NOT NULL,
+TimeSlot nvarchar(250) NOT NULL,
+PeakViewership int NOT NULL,
+TotalUniqueViews int NOT NULL,
+StartingTime datetime NOT NULL,
+CONSTRAINT PK_Race PRIMARY KEY (id)
+)
+
+--Create SWimmingType
+CREATE TABLE SwimmingType (
+id int identity(1,1),
+Name nvarchar(250) NOT NULL,
+CONSTRAINT PK_SwimmingType PRIMARY KEY (id)
+)
+--add FK for new table
+ALTER TABLE dbo.Race
+ADD CONSTRAINT FK_Race_SwimmingTypeID FOREIGN KEY (SwimmingTypeID)
+      REFERENCES dbo.SwimmingType (id)
+
+--Create Competition
+CREATE TABLE dbo.Competition (
+id int identity(1,1),
+StartDate datetime NOT NULL,
+EndDate datetime NOT NULL,
+CONSTRAINT PK_Competition PRIMARY KEY (id)
+)
+
+--add FK for new table
+ALTER TABLE dbo.Race
+ADD CONSTRAINT FK_Race_CompetitionID FOREIGN KEY (CompetitionID)
+      REFERENCES dbo.Competition (id)
+
+--create Result
+CREATE TABLE dbo.Result (
+id int identity(1,1),
+RaceID int NOT NULL,
+SwimmerID int NOT NULL,
+Time nvarchar(50) NOT NULL,
+CONSTRAINT PK_Result PRIMARY KEY (id)
+)
+
+--create Swimmer
+CREATE TABLE dbo.Swimmer (
+id int identity(1,1),
+FirstName nvarchar(250) NOT NULL,
+LastName nvarchar(250) NOT NULL,
+PassportNumber nvarchar(250) NOT NULL,
+BirthDate datetime NOT NULL,
+Gender nvarchar(15) NOT NULL,
+CountryID int NOT NULL,
+CoachID int NOT NULL,
+CONSTRAINT PK_Swimmer PRIMARY KEY (id)
+)
+
+--Add FK for Result for Swimmer
+ALTER TABLE dbo.Result
+ADD CONSTRAINT FK_Result_SwimmerID FOREIGN KEY (SwimmerID)
+      REFERENCES dbo.Swimmer (id)
+
+--Add FK for Result for Race
+ALTER TABLE dbo.Result
+ADD CONSTRAINT FK_Result_RaceID FOREIGN KEY (RaceID)
+      REFERENCES dbo.Race (id)
+
+--Add FK for Swimmer for Coach
+ALTER TABLE dbo.Swimmer
+ADD CONSTRAINT FK_Swimmer_CoachID FOREIGN KEY (CoachID)
+      REFERENCES dbo.Coach (id)
+
+--Add FK for Swimmer for Country
+ALTER TABLE dbo.Swimmer
+ADD CONSTRAINT FK_Swimmer_CountryID FOREIGN KEY (CountryID)
+      REFERENCES dbo.Country (id)
+
+--create Coach
+CREATE TABLE dbo.Coach (
+id int identity(1,1),
+FirstName nvarchar(250) NOT NULL,
+LastName nvarchar(250) NOT NULL,
+PassportNumber nvarchar(250) NOT NULL,
+CountryID int NOT NULL,
+CONSTRAINT PK_Coach PRIMARY KEY (id)
+)
+
+--Create Country
+CREATE TABLE dbo.Country (
+id int identity(1,1),
+Name nvarchar(250) NOT NULL,
+CONSTRAINT PK_Country PRIMARY KEY (id)
+)
+
+--Add FK for Coach for Country
+ALTER TABLE dbo.Coach
+ADD CONSTRAINT FK_Coach_CountryID FOREIGN KEY (CountryID)
+      REFERENCES dbo.Country (id)
+
+--Create Advertiser
+CREATE TABLE dbo.Advertiser (
+id int identity(1,1),
+Name nvarchar(250) NOT NULL,
+CONSTRAINT PK_Advertiser PRIMARY KEY (id)
+)
+
+CREATE TABLE dbo.RaceBridgeAdvertiser (
+RaceID int NOT NULL,
+AdvertiserID int NOT NULL,
+CONSTRAINT FK_RaceBridgeAdvertiser_AdvertiserID FOREIGN KEY (AdvertiserID)
+	      REFERENCES dbo.Advertiser (id),
+CONSTRAINT FK_RaceBridgeAdvertiser_RaceID FOREIGN KEY (RaceID)
+	      REFERENCES dbo.Race (id),
+)
+
+--Create AdvertiserContract
+CREATE TABLE dbo.AdvertiserContract (
+id int identity(1,1),
+StartDate datetime NOT NULL,
+EndDate datetime NOT NULL,
+RatePerView decimal NOT NULL,
+AdvertiserID int NOT NULL,
+CONSTRAINT PK_AdvertiserContract PRIMARY KEY (id),
+CONSTRAINT FK_AdvertiserContract_AdvertiserID FOREIGN KEY (AdvertiserID)
+	      REFERENCES dbo.Advertiser (id)
+)
 
