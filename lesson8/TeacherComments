@@ -1,0 +1,6 @@
+Well done!
+
+Your solution to get 1m people is too hard.
+You are cross joining multiple times and take only 1 row for each cycle step. For our task it would take 1mil cross joins.
+
+Mark: 10.
