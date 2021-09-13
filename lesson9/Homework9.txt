@@ -1,17 +1,28 @@
---Добавляем строку код страны в таблицу стран
+--Р’С‚РѕСЂРѕРµ Р·Р°РґР°РЅРёРµ
+/*Р”Р°РЅР° С‚Р°Р±Р»РёС†Р° Р»СЋРґРµР№ People. РџРѕР»СЏ: ID, FirstName, ParentName, LastName,  ID_Father, ID_Mother.
+Р”Р»СЏ РІСЃРµС… Р”РјРёС‚СЂРёРµРІ РІС‹РІРµРґРёС‚Рµ РёС… Р¤РРћ Рё Р¤РРћ РёС… РѕС‚С†РѕРІ*/
+SELECT CONCAT(LEFT(p1.LasttName, 1), '.', LEFT(p1.FirstName, 1),'.', LEFT(p1.ParentName, 1)) as [Р¤РРћ], 
+		CONCAT(LEFT(p2.LasttName, 1), '.', LEFT(p2.FirstName, 1),'.', LEFT(p2.ParentName, 1)) as [Р¤РРћ РѕС‚С†Р°]
+FROM people p1
+	JOIN people p2 ON p1.ID_Father = p2.ID
+WHERE p1.FirstName = 'Р”РјРёС‚СЂРёР№'
+
+
+--Р“РµРЅРµСЂР°С†РёСЏ РґР°РЅРЅС‹С…
+--Р”РѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РєРѕРґ СЃС‚СЂР°РЅС‹ РІ С‚Р°Р±Р»РёС†Сѓ СЃС‚СЂР°РЅ
 ALTER TABLE dbo.Country
 ADD Code nvarchar(2) NOT NULL
 
---Добавляем названия стран в таблицу стран из сгенерированного файла c mackaroo
+--Р”РѕР±Р°РІР»СЏРµРј РЅР°Р·РІР°РЅРёСЏ СЃС‚СЂР°РЅ РІ С‚Р°Р±Р»РёС†Сѓ СЃС‚СЂР°РЅ РёР· СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅРѕРіРѕ С„Р°Р№Р»Р° c mackaroo
 INSERT INTO dbo.Country (Name, Code)
 SELECT Name, Code
 	FROM dbo.Countries
 
---Добавляем поле гендера для тренеров
+--Р”РѕР±Р°РІР»СЏРµРј РїРѕР»Рµ РіРµРЅРґРµСЂР° РґР»СЏ С‚СЂРµРЅРµСЂРѕРІ
 ALTER TABLE dbo.Coach
 ADD Gender nvarchar(1) NOT NULL
 
---Добавляем тренеров из сгенерированного файла c mackaroo
+--Р”РѕР±Р°РІР»СЏРµРј С‚СЂРµРЅРµСЂРѕРІ РёР· СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅРѕРіРѕ С„Р°Р№Р»Р° c mackaroo
 INSERT INTO [dbo].[Coach] (FirstName, LastName, PassportNumber, CountryID, Gender)
 SELECT 
 [FirstName] = [first_name], 
@@ -21,11 +32,11 @@ SELECT
 [Gender] = gender
 FROM dbo.CoachNames
 
---Добавляем пловцов
---Выключаем ограничения
+--Р”РѕР±Р°РІР»СЏРµРј РїР»РѕРІС†РѕРІ
+--Р’С‹РєР»СЋС‡Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE dbo.swimmer NOCHECK CONSTRAINT ALL
 
---Генерируем записи и добавляем пловцов
+--Р“РµРЅРµСЂРёСЂСѓРµРј Р·Р°РїРёСЃРё Рё РґРѕР±Р°РІР»СЏРµРј РїР»РѕРІС†РѕРІ
 INSERT INTO [dbo].[Swimmer] (FirstName, LastName, PassportNumber, BirthDate, Gender, CountryID, CoachID)
 SELECT 
 [FirstName] = names.[First_Name], 
@@ -33,10 +44,10 @@ SELECT
 [PassportNumber] = CONCAT(LEFT(names.[first_name], 1), 
 					left(last_name, 1), '-', names.[gender], '-', 
 					LEFT(NEWID(), 8), '-', 
-					FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1), --первые буквы имени и фамилии + рандомный id + рандомная 4-х значная цифра
+					FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1), --РїРµСЂРІС‹Рµ Р±СѓРєРІС‹ РёРјРµРЅРё Рё С„Р°РјРёР»РёРё + СЂР°РЅРґРѕРјРЅС‹Р№ id + СЂР°РЅРґРѕРјРЅР°СЏ 4-С… Р·РЅР°С‡РЅР°СЏ С†РёС„СЂР°
 [BirthDate] = DATEFROMPARTS(FLOOR(RAND(CHECKSUM(NewId()))*(2002-1980+1))+1980, 
 		FLOOR(RAND(CHECKSUM(NewId()))*(12-1+1))+1, 
-		FLOOR(RAND(CHECKSUM(NewId()))*(28-1+1))+1), --рандомно генерируем даты начиная с 1980 года
+		FLOOR(RAND(CHECKSUM(NewId()))*(28-1+1))+1), --СЂР°РЅРґРѕРјРЅРѕ РіРµРЅРµСЂРёСЂСѓРµРј РґР°С‚С‹ РЅР°С‡РёРЅР°СЏ СЃ 1980 РіРѕРґР°
 [Gender] = names.[gender],
 [CountryID] = FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1, 
 [CoachID] = FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1 
@@ -47,18 +58,18 @@ FROM (
 	WHERE cn.gender = sn.gender
 ) as names
 
---Возвращаем ограничения
+--Р’РѕР·РІСЂР°С‰Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE tableName WITH CHECK CHECK CONSTRAINT ALL
 
---Добавляем типы плавания
---Создаем 2 временных таблицы для типов плавания и дистанций
+--Р”РѕР±Р°РІР»СЏРµРј С‚РёРїС‹ РїР»Р°РІР°РЅРёСЏ
+--РЎРѕР·РґР°РµРј 2 РІСЂРµРјРµРЅРЅС‹С… С‚Р°Р±Р»РёС†С‹ РґР»СЏ С‚РёРїРѕРІ РїР»Р°РІР°РЅРёСЏ Рё РґРёСЃС‚Р°РЅС†РёР№
 CREATE TABLE #SwimmingTypesNames
 (type_name nvarchar(100))
 
 CREATE TABLE #Distances
 (distance nvarchar(30))
 
---Добавляем значения
+--Р”РѕР±Р°РІР»СЏРµРј Р·РЅР°С‡РµРЅРёСЏ
 INSERT INTO #SwimmingTypesNames
 VALUES 
 ('Front Crawl'), ('Breaststroke'), ('Butterfly Stroke'),  ('Backstroke'), ('Sidestroke')
@@ -67,7 +78,7 @@ INSERT INTO #Distances
 VALUES 
 ('50m'), ('100m'), ('200m'),  ('400m'), ('800m') 
 
---Комбинируем данные и добавляем их в таблицу типов плавания
+--РљРѕРјР±РёРЅРёСЂСѓРµРј РґР°РЅРЅС‹Рµ Рё РґРѕР±Р°РІР»СЏРµРј РёС… РІ С‚Р°Р±Р»РёС†Сѓ С‚РёРїРѕРІ РїР»Р°РІР°РЅРёСЏ
 INSERT INTO [dbo].[SwimmingType] (Name, Distance)
 SELECT
 [Name] = types.[type_name],
@@ -79,7 +90,7 @@ SELECT st.[type_name], d.[distance]
 	CROSS JOIN [dbo].#Distances d
 ) as types
 
---Добавляем соревнования, даты соревнования будут начинаться с 2001-го года
+--Р”РѕР±Р°РІР»СЏРµРј СЃРѕСЂРµРІРЅРѕРІР°РЅРёСЏ, РґР°С‚С‹ СЃРѕСЂРµРІРЅРѕРІР°РЅРёСЏ Р±СѓРґСѓС‚ РЅР°С‡РёРЅР°С‚СЊСЃСЏ СЃ 2001-РіРѕ РіРѕРґР°
 DECLARE @c1sd date
 DECLARE @c1ed date
 SET @c1sd = '2000-06-01'
@@ -93,23 +104,23 @@ SELECT
 [EndDate] = DATEADD(year, 1, @c1ed),
 [CompetitionName] = CONCAT('Competition', ' ', 
 					MONTH(DATEADD(year, 1, @c1sd)),'/', 
-					RIGHT(YEAR(DATEADD(year, 1, @c1sd)), 2)) --составляем название соревнования из месяца и года проведения
+					RIGHT(YEAR(DATEADD(year, 1, @c1sd)), 2)) --СЃРѕСЃС‚Р°РІР»СЏРµРј РЅР°Р·РІР°РЅРёРµ СЃРѕСЂРµРІРЅРѕРІР°РЅРёСЏ РёР· РјРµСЃСЏС†Р° Рё РіРѕРґР° РїСЂРѕРІРµРґРµРЅРёСЏ
 SET @c1sd = DATEADD(year, 1, @c1sd)
 SET @c1ed = DATEADD(year, 1, @c1ed)
 END
 
-----Добавляем заплывы
---Делаем PeakViewership NULL, чтобы после вставки TotalUniqueViews сделать update этой колонки
+----Р”РѕР±Р°РІР»СЏРµРј Р·Р°РїР»С‹РІС‹
+--Р”РµР»Р°РµРј PeakViewership NULL, С‡С‚РѕР±С‹ РїРѕСЃР»Рµ РІСЃС‚Р°РІРєРё TotalUniqueViews СЃРґРµР»Р°С‚СЊ update СЌС‚РѕР№ РєРѕР»РѕРЅРєРё
 ALTER TABLE dbo.race ALTER COLUMN peakviewership int NULL
 
---Выключаем ограничения
+--Р’С‹РєР»СЋС‡Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE dbo.race NOCHECK CONSTRAINT ALL
 
 INSERT INTO dbo.Race (CompetitionID, SwimmingTypeID, TimeSlot, TotalUniqueViews)
 SELECT
 [CompetitionID] = comp.CompetitionID,
 [SwimmingTypeID] = comp.SwimmingTypeID,
-[TimeSlot] = (CASE		--рандомно выбираем в какое время дня проходила трансляция заплыва
+[TimeSlot] = (CASE		--СЂР°РЅРґРѕРјРЅРѕ РІС‹Р±РёСЂР°РµРј РІ РєР°РєРѕРµ РІСЂРµРјСЏ РґРЅСЏ РїСЂРѕС…РѕРґРёР»Р° С‚СЂР°РЅСЃР»СЏС†РёСЏ Р·Р°РїР»С‹РІР°
 		WHEN FLOOR(RAND(CHECKSUM(NewId()))*(3-1+1))+1 = 1 THEN 'Morning'
 		WHEN FLOOR(RAND(CHECKSUM(NewId()))*(3-1+1))+1 = 2 THEN 'Afternoon'
 		WHEN FLOOR(RAND(CHECKSUM(NewId()))*(3-1+1))+1 = 3 THEN 'Evening'
@@ -120,55 +131,55 @@ FROM (SELECT c.id as CompetitionID, st.id as SwimmingTypeID
 	FROM dbo.Competition c
 	cross join dbo.swimmingtype st) comp
 
---Задаем сколько было максимальных просмотров одновременно, их должно быть не больше, чем общее количество просмотров
+--Р—Р°РґР°РµРј СЃРєРѕР»СЊРєРѕ Р±С‹Р»Рѕ РјР°РєСЃРёРјР°Р»СЊРЅС‹С… РїСЂРѕСЃРјРѕС‚СЂРѕРІ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ, РёС… РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµ Р±РѕР»СЊС€Рµ, С‡РµРј РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕСЃРјРѕС‚СЂРѕРІ
 UPDATE dbo.Race
 SET PeakViewership = FLOOR(RAND(CHECKSUM(NewId()))*([TotalUniqueViews]-0+1))+0
 
---Возвращаем ограничения
+--Р’РѕР·РІСЂР°С‰Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE dbo.race WITH CHECK CHECK CONSTRAINT ALL
 
---Генерируем Results
---Выключаем ограничения
+--Р“РµРЅРµСЂРёСЂСѓРµРј Results
+--Р’С‹РєР»СЋС‡Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE dbo.Result NOCHECK CONSTRAINT ALL
---Генерируем результы с учетом возраста пловцов
+--Р“РµРЅРµСЂРёСЂСѓРµРј СЂРµР·СѓР»СЊС‚С‹ СЃ СѓС‡РµС‚РѕРј РІРѕР·СЂР°СЃС‚Р° РїР»РѕРІС†РѕРІ
 INSERT INTO dbo.Result (RaceID, SwimmerID, Time)
 SELECT TOP 1000000 
 [RaceID] = race.RaceID,
 [SwimmerID] = race.SwimmerID, 
-[Time] = FLOOR(RAND(CHECKSUM(NewId()))*(300-59+1))+59 --условно самое медленное время, 
-											--за которое можно проплыть дистанцию 5 минут, меньшее 59 секунд.
+[Time] = FLOOR(RAND(CHECKSUM(NewId()))*(300-59+1))+59 --СѓСЃР»РѕРІРЅРѕ СЃР°РјРѕРµ РјРµРґР»РµРЅРЅРѕРµ РІСЂРµРјСЏ, 
+											--Р·Р° РєРѕС‚РѕСЂРѕРµ РјРѕР¶РЅРѕ РїСЂРѕРїР»С‹С‚СЊ РґРёСЃС‚Р°РЅС†РёСЋ 5 РјРёРЅСѓС‚, РјРµРЅСЊС€РµРµ 59 СЃРµРєСѓРЅРґ.
 FROM (SELECT s.id as SwimmerID, r.id as RaceID, r.CompetitionID, DATEDIFF(hour, s.BirthDate, GETDATE())/8766 as Age, s.BirthDate
 	FROM dbo.swimmer s
 	cross join dbo.race r
-	WHERE (DATEDIFF(hour, s.BirthDate, GETDATE())/8766) > 18) race --пловцу должно быть больше 18-ти лет
+	WHERE (DATEDIFF(hour, s.BirthDate, GETDATE())/8766) > 18) race --РїР»РѕРІС†Сѓ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 18-С‚Рё Р»РµС‚
 
---Возвращаем ограничения
+--Р’РѕР·РІСЂР°С‰Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE dbo.Result WITH CHECK CHECK CONSTRAINT ALL
 
---Генерируем Advertister на mockarooи вставляем в таблицу
+--Р“РµРЅРµСЂРёСЂСѓРµРј Advertister РЅР° mockarooРё РІСЃС‚Р°РІР»СЏРµРј РІ С‚Р°Р±Р»РёС†Сѓ
 INSERT INTO Advertiser (Name)
 SELECT CompanyName
 FROM dbo.AdvertiserNames 
 
---Генерируем AdvertisterContracts
+--Р“РµРЅРµСЂРёСЂСѓРµРј AdvertisterContracts
 ALTER TABLE dbo.advertisercontract NOCHECK CONSTRAINT ALL
---Добавляем контракты рекламодателей
+--Р”РѕР±Р°РІР»СЏРµРј РєРѕРЅС‚СЂР°РєС‚С‹ СЂРµРєР»Р°РјРѕРґР°С‚РµР»РµР№
 INSERT INTO dbo.AdvertiserContract (StartDate, RatePerView, AdvertiserID)
 SELECT 
 [StartDate] = DATEFROMPARTS(FLOOR(RAND(CHECKSUM(NewId()))*(2020-2001+1))+2001, 
 		FLOOR(RAND(CHECKSUM(NewId()))*(12-1+1))+1, 
 		FLOOR(RAND(CHECKSUM(NewId()))*(28-1+1))+1),
-[RatePerView] = FLOOR(RAND(CHECKSUM(NewId()))*(60-5+1))+5, --пусть это значение будет подразумевать центы, т.е. центов за один просмотр
+[RatePerView] = FLOOR(RAND(CHECKSUM(NewId()))*(60-5+1))+5, --РїСѓСЃС‚СЊ СЌС‚Рѕ Р·РЅР°С‡РµРЅРёРµ Р±СѓРґРµС‚ РїРѕРґСЂР°Р·СѓРјРµРІР°С‚СЊ С†РµРЅС‚С‹, С‚.Рµ. С†РµРЅС‚РѕРІ Р·Р° РѕРґРёРЅ РїСЂРѕСЃРјРѕС‚СЂ
 [AdvertiserID] = id
 FROM dbo.advertiser
---Добавляем дату окончания контрактов
+--Р”РѕР±Р°РІР»СЏРµРј РґР°С‚Сѓ РѕРєРѕРЅС‡Р°РЅРёСЏ РєРѕРЅС‚СЂР°РєС‚РѕРІ
 UPDATE dbo.AdvertiserContract
 SET EndDate = DATEADD(year, FLOOR(RAND(CHECKSUM(NewId()))*(3-1+1))+1, [StartDate])
---Возвращаем ограничения
+--Р’РѕР·РІСЂР°С‰Р°РµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
 ALTER TABLE dbo.AdvertiserContract WITH CHECK CHECK CONSTRAINT ALL
 
---Наполняем CompetitionBridgeAdvertiser, т.е. реклама от компаний была показана во всех соревнованиях, 
---у которых совпадали даты проведения с датами длительности контракта
+--РќР°РїРѕР»РЅСЏРµРј CompetitionBridgeAdvertiser, С‚.Рµ. СЂРµРєР»Р°РјР° РѕС‚ РєРѕРјРїР°РЅРёР№ Р±С‹Р»Р° РїРѕРєР°Р·Р°РЅР° РІРѕ РІСЃРµС… СЃРѕСЂРµРІРЅРѕРІР°РЅРёСЏС…, 
+--Сѓ РєРѕС‚РѕСЂС‹С… СЃРѕРІРїР°РґР°Р»Рё РґР°С‚С‹ РїСЂРѕРІРµРґРµРЅРёСЏ СЃ РґР°С‚Р°РјРё РґР»РёС‚РµР»СЊРЅРѕСЃС‚Рё РєРѕРЅС‚СЂР°РєС‚Р°
 INSERT INTO dbo.CompetitionBridgeAdvertiser (CompetitionID, AdvertiserID)
 SELECT 
 [CompetitionID] = c.id, 
