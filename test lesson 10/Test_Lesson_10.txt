@@ -1,0 +1,66 @@
+--Задачи 
+--1) Найдите людей и их номера телефонов, код города которых начинается на  4 и заканчивается на 5.
+--( таблицы Person.PersonPhone, Person.Person) 
+SELECT p.FirstName, p.LastName, pp.PhoneNumber
+FROM Person.Person p
+JOIN Person.PersonPhone pp on pp.BusinessEntityID=p.BusinessEntityID
+WHERE LEFT(pp.PhoneNumber, 3) LIKE '4%5'
+
+/*2) Отнести каждого человека из [HumanResources].[Employee] в свою возрастную категорию:
+Adolescence: 17-20
+Adults: 21-59
+Elderly: 60-75
+Senile: 76-90 */
+SELECT BusinessEntityID, 
+[Age category] = CASE
+		WHEN (DATEDIFF(hour, BirthDate, GETDATE())/8766) > 17 AND (DATEDIFF(hour, BirthDate, GETDATE())/8766) < 20 THEN '17-20'
+		WHEN (DATEDIFF(hour, BirthDate, GETDATE())/8766) > 21 AND (DATEDIFF(hour, BirthDate, GETDATE())/8766) < 59 THEN '21-59'
+		WHEN (DATEDIFF(hour, BirthDate, GETDATE())/8766) > 60 AND (DATEDIFF(hour, BirthDate, GETDATE())/8766) < 75 THEN '60-75'
+		WHEN (DATEDIFF(hour, BirthDate, GETDATE())/8766) > 76 AND (DATEDIFF(hour, BirthDate, GETDATE())/8766) < 90 THEN '76-90'
+		ELSE 'Undetermined'
+	END
+FROM [HumanResources].[Employee]
+
+--3) Вывести самый дорогой продукт для каждого цвета из [Production].[Product]
+SELECT Color, Name, MAX(StandardCost) OVER (PARTITION BY Color)
+FROM [Production].[Product]
+
+--Кинопрокат
+таблица 1 - Посетитель
+id
+Год рождения
+Имя 
+Фамилия
+
+таблица 2 - Кинотеатр
+id
+Название
+
+таблица 3 - Фильм
+id
+Название
+Тип
+Количество суперзвезд
+
+таблица 4 - Зал
+id
+Номер
+Количество мест
+Уровень комфорта
+
+таблица 5 - Сеанс
+id
+Время и дата
+Стоимость билета
+ID Зала
+ID фильма
+
+таблица 6 - Билет
+id
+ID Посетителя
+ID Сеанс
+
+Найти сколько ежегодно в среднем ходит в кино каждая возрастная группа с промежутком в 10 лет.
+Для каждого кинотеатра найти самый кассовый фильм.
+Найти суммарную выручку по все типам кино.
+Для каждого уровня комфорта зала найти среднюю выручку за год с группировкой по типам кино.
