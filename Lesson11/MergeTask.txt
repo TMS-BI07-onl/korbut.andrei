@@ -1,0 +1,21 @@
+MERGE common.calc target
+USING common.data_for_merge source ON target.function_name = source.Darya
+WHEN MATCHED 
+	THEN UPDATE SET target.function_count = (target.function_count+1)
+WHEN NOT MATCHED BY TARGET AND source.Darya IS NOT NULL
+	THEN INSERT (function_name, function_count)
+	VALUES
+	(source.Darya, 1)
+WHEN NOT MATCHED BY SOURCE
+	THEN DELETE;
+--потом берем следующую колонкус наименьшим количество функций и так далее
+MERGE common.calc target
+USING common.data_for_merge source ON target.function_name = source.IrinaPashkovich
+WHEN MATCHED 
+	THEN UPDATE SET target.function_count = (target.function_count+1)
+WHEN NOT MATCHED BY TARGET AND source.IrinaPashkovich IS NOT NULL
+	THEN INSERT (function_name, function_count)
+	VALUES
+	(source.IrinaPashkovich, 1)
+WHEN NOT MATCHED BY SOURCE
+	THEN DELETE;

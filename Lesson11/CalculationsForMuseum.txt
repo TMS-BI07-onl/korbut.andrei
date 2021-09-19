@@ -1,0 +1,61 @@
+--TASK 1
+--Найти сколько билетов продается в неделю на выставки экспонатов художника Петрова.
+
+--Solution 1, показываем сколько в среднем было продано билетов за неделю по каждой выставке в которой учавствовал художник.
+SELECT DISTINCT e.ExName as [Exhibition], 
+	DATEDIFF(day, StartDate, EndDate) as [Lenght of exhibition], 
+	((COUNT(t.id) OVER (PARTITION BY t.expositionID))/DATEDIFF(day, StartDate, EndDate))*7  as [Tickets sold per week] 
+	--считаем количество всех билетов, потом делим на продолжительность выставки и потом умножаем на 7 дней
+FROM museum.Exposition e
+	JOIN museum.ticket t ON e.id = t.expositionID
+	JOIN museum.expositionbridgeartwork eba ON eba.expositionID = e.id
+	JOIN museum.Artwork aw ON aw.id=eba.artworkID 
+	JOIN museum.Artist a ON a.id=aw.artistID
+WHERE a.id = '145' --здесь выбираем определенного художника
+
+--Solution 2, показываем сколько продаж билетов было в каждой календарной неделе выставки. 
+--Здесь можно было бы как-то динамически это оформить, но кажется получилось бы слишком сложно, чтобы был смысл это писать.
+--В каждом отдельном селекте находим количество проданных билетов за календарную неделю с даты начала выставки в которой учавствовал художник
+--и потом складываем результаты.
+SELECT DISTINCT a.[Exhibition], a.[Lenght of exhibition], a.[Tickets sold first week], b.[Tickets sold second week], c.[Tickets sold third week] FROM 
+(SELECT DISTINCT e.[ExName] as [Exhibition],DATEDIFF(day, e.StartDate, e.EndDate) as [Lenght of exhibition], e.id as [1stID], 
+	COUNT(t.id) OVER (PARTITION BY t.expositionID) as [Tickets sold first week]
+			FROM museum.Exposition e
+				JOIN museum.ticket t ON e.id = t.expositionID
+				JOIN museum.expositionbridgeartwork eba ON eba.expositionID = e.id
+				JOIN museum.Artwork aw ON aw.id=eba.artworkID 
+				JOIN museum.Artist a ON a.id=aw.artistID
+			WHERE t.visitdate BETWEEN e.StartDate AND DATEADD(day, 7, e.StartDate) and a.id = '145') a
+LEFT JOIN 
+(SELECT DISTINCT e.[ExName], e.id as [2ndID], COUNT(t.id) OVER (PARTITION BY t.expositionID) [Tickets sold second week]
+			FROM museum.Exposition e
+				JOIN museum.ticket t ON e.id = t.expositionID
+				JOIN museum.expositionbridgeartwork eba ON eba.expositionID = e.id
+				JOIN museum.Artwork aw ON aw.id=eba.artworkID 
+				JOIN museum.Artist a ON a.id=aw.artistID
+			WHERE t.visitdate BETWEEN DATEADD(day, 7, e.StartDate) 
+			AND DATEADD(day, 7, (DATEADD(day, 7, e.StartDate))) and a.id = '145') b ON b.[2ndID] = a.[1stID]
+LEFT JOIN 
+(SELECT DISTINCT e.[ExName], e.id as [3rdID], COUNT(t.id) OVER (PARTITION BY t.expositionID) [Tickets sold third week]
+			FROM museum.Exposition e
+				JOIN museum.ticket t ON e.id = t.expositionID
+				JOIN museum.expositionbridgeartwork eba ON eba.expositionID = e.id
+				JOIN museum.Artwork aw ON aw.id=eba.artworkID 
+				JOIN museum.Artist a ON a.id=aw.artistID
+			WHERE t.visitdate BETWEEN DATEADD(day, 7, (DATEADD(day, 7, e.StartDate))) 
+			AND DATEADD(day, 7, (DATEADD(day, 7, DATEADD(day, 7, e.StartDate)))) and a.id = '145') c ON b.[2ndID] = c.[3rdID]
+
+--TASK 2
+--Найти выставки, состоящие из экспонатов одного художника. Вывести название выставки и имя художника.
+SELECT singular.expositionID as [Exhibition], e.[ExName] as Exhibition, CONCAT(a.name, ' ', a.surname) as [Artist]
+from (
+SELECT eba.expositionID, COUNT(DISTINCT aw.artistID) as [count]
+FROM museum.expositionbridgeartwork eba
+	JOIN museum.Artwork aw ON aw.id = eba.artworkID
+GROUP BY expositionID
+) singular
+	JOIN museum.expositionbridgeartwork eba ON eba.expositionID = singular.expositionID
+	JOIN museum.Exposition e ON e.id=eba.expositionID 
+	JOIN museum.Artwork aw ON aw.id=eba.artworkID 
+	JOIN museum.Artist a ON a.id=aw.artistID
+WHERE singular.count = '1'
