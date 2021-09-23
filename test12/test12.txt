@@ -1,0 +1,57 @@
+--TASK 1
+INSERT INTO manufacturer (name, country_ID)
+VALUES
+('HP', '4')
+--либо (хотя не уверен на 100% что такое сработало бы)
+INSERT INTO manufacturer (name, country_ID)
+SELECT 
+[country_id] = id,
+[name] = 'HP'
+FROM country 
+WHERE name = 'Америка'
+
+--TASK 2
+UPDATE user
+SET [age]  = FLOOR([age]/3)
+WHERE [name] = 'Андрей'
+
+--TASK 3
+--with max
+SELECT b.name
+FROM (
+SELECT name, price, MAX(price) as [max_price]
+FROM product
+) b
+WHERE b.price=b.[max_price]
+--with rank
+SELECT b.name
+FROM (
+SELECT name, RANK() OVER (PARTITION BY price ORDER BY price desc) as [price_rank]
+FROM product
+) b
+WHERE b.[price_rank] = 1
+
+--TASK 4
+SELECT u.name, u.email
+FROM user u
+	JOIN phone p ON p.user_id=u.id
+WHERE p.phone LIKE '3%4' OR u.age > 35
+
+--TASK 5
+--count of items bought
+SELECT TOP 5 u.name, u.email
+FROM (
+SELECT user_id, COUNT(product_id) OVER (PARTITION BY user_id) as [total_items_purchased] 
+FROM order
+ORDER BY COUNT(product_id) OVER (PARTITION BY user_id) desc
+) b
+	JOIN user u ON b.user_id=u.id
+
+--sum of prices
+SELECT TOP 5 b.user_id
+FROM (
+SELECT o.user_id, sum(price) OVER (PARTITION BY o.user_id)
+FROM product p 
+	JOIN order o ON p.id=o.product_id
+ORDER BY sum(price) OVER (PARTITION BY o.user_id) desc
+)
