@@ -1,0 +1,582 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/20/2021 9:34:45 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-O9GHNJ64"
+  DTS:CreatorName="LAPTOP-O9GHNJ64\Asus"
+  DTS:DTSID="{EB1B6DE4-A7A0-4701-9248-35706E9EB0CD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.121"
+  DTS:LocaleID="1049"
+  DTS:ObjectName="hw12"
+  DTS:PackageType="5"
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{5FFF6325-30C4-4EB0-B087-354146D7FDAC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.AdventureWorksDW2017]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AB4DFFC8-5F3B-4F60-9EB3-3710477D5062}"
+      DTS:ObjectName="LAPTOP-O9GHNJ64\SQLEXPRESS.AdventureWorksDW2017">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LAPTOP-O9GHNJ64\SQLEXPRESS;Initial Catalog=AdventureWorksDW2017;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{86596CC9-031A-4933-A548-5043922FEEDE}"
+      DTS:ObjectName="LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LAPTOP-O9GHNJ64\SQLEXPRESS;Initial Catalog=bi_course;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{93D67116-41E1-43EA-B07A-46E3C272ED28}"
+      DTS:ObjectName="Диспетчер соединений Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\SSIS file for ExportToExcel.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Задача потока данных"
+      DTS:DTSID="{718A311A-47D0-424A-A37C-79A809C20E32}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert 10 records into dboSwimmers from dboDimEmployees"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Источник &quot;OLE DB&quot;;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;7"
+              description="Источник &quot;OLE DB&quot;"
+              name="dimEmployee"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Время ожидания команды, в секундах. Величина 0 означает неограниченное время ожидания."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowset">[dbo].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает переменную, содержащую имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Команда SQL для выполнения."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select top (10) FirstName, 
+LastName,
+[PassportNumber] = CONCAT(LEFT(firstname, 1), left(lastname,1), '-', gender, '-',  LEFT(NEWID(), 8), '-', 	FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1),
+[BirthDate] = DATEFROMPARTS(FLOOR(RAND(CHECKSUM(NewId()))*(2002-1980+1))+1980, 
+		FLOOR(RAND(CHECKSUM(NewId()))*(12-1+1))+1, 
+		FLOOR(RAND(CHECKSUM(NewId()))*(28-1+1))+1),
+Gender,
+[CountryID] = FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1, 
+[CoachID] = FLOOR(RAND(CHECKSUM(NewId()))*(1000-1+1))+1
+from adventureworksdw2017.dbo.dimemployee</property>
+                <property
+                  dataType="System.String"
+                  description="Переменная, содержащая команду SQL для выполнения."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Вызывает безусловное использование значение свойства DefaultCodePage при описании символьных данных."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает используемый режим доступа к базе данных."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Сопоставления между параметрами в команде SQL и переменными."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.AdventureWorksDW2017]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.AdventureWorksDW2017]"
+                  description="Соединение OLE DB среды выполнения, используемое для доступа к базе данных."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;]"
+                  name="Выход источника &quot;OLE DB&quot;">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      length="37"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      name="PassportNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[BirthDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[BirthDate]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[Gender]"
+                      length="1"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[CountryID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[CountryID]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[CountryID]"
+                      name="CountryID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[CoachID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[CoachID]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[CoachID]"
+                      name="CoachID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      dataType="wstr"
+                      length="37"
+                      name="PassportNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[BirthDate]"
+                      dataType="dbDate"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[CountryID]"
+                      dataType="r8"
+                      name="CountryID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[CoachID]"
+                      dataType="r8"
+                      name="CoachID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;]"
+                  isErrorOut="true"
+                  name="Вывод ошибок источника &quot;OLE DB&quot;">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      dataType="wstr"
+                      length="37"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      name="PassportNumber" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[BirthDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[CountryID]"
+                      dataType="r8"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[CountryID]"
+                      name="CountryID" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[CoachID]"
+                      dataType="r8"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[CoachID]"
+                      name="CoachID" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Назначение &quot;OLE DB&quot;;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;4"
+              description="Назначение &quot;OLE DB&quot;"
+              name="Swimmer"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Время ожидания команды, в секундах. Величина 0 означает неограниченное время ожидания."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowset">[dbo].[Swimmer]</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает переменную, содержащую имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Команда SQL для выполнения."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Вызывает безусловное использование значение свойства DefaultCodePage при описании символьных данных."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает используемый режим доступа к базе данных."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Указывает, должны ли значения в столбцах идентификаторов копироваться в назначение. Если свойство имеет значение false, значения в столбцах идентификаторов будут созданы автоматически в месте назначения. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Указывает, будут ли в назначение вставляться значения NULL для столбцов, содержащих их. Значение false показывает, что если столбец имеет значение NULL, то в назначение будет вставлено его значение по умолчанию. Применяется только в случае, если включена быстрая загрузка."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Задает параметры быстрой загрузки. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 10</property>
+                <property
+                  dataType="System.Int32"
+                  description="Задает, когда выдаются сообщения о фиксации транзакции в ходе вставки данных. Значение 0 задает, что по окончании вставки данных будет выдано одно сообщение о фиксации транзакции. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadMaxInsertCommitSize">10</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  description="Соединение OLE DB среды выполнения, используемое для доступа к базе данных."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;]"
+                  errorOrTruncationOperation="Вставить"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Вход назначения &quot;OLE DB&quot;">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[LastName]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Gender]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[CoachID]"
+                      cachedDataType="r8"
+                      cachedName="CoachID"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CoachID]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[CoachID]" />
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[CountryID]"
+                      cachedDataType="r8"
+                      cachedName="CountryID"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CountryID]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[CountryID]" />
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="37"
+                      cachedName="PassportNumber"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PassportNumber]" />
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[BirthDate]"
+                      cachedDataType="dbDate"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[BirthDate]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[FirstName]"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;].Columns[FirstName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="250"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="250"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      dataType="wstr"
+                      length="250"
+                      name="PassportNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="15"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CountryID]"
+                      dataType="i4"
+                      name="CountryID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CoachID]"
+                      dataType="i4"
+                      name="CoachID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Вывод ошибок назначения &quot;OLE DB&quot;"
+                  synchronousInputId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Insert 10 records into dboSwimmers from dboDimEmployees.Paths[Выход источника &quot;OLE DB&quot;]"
+              endId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer.Inputs[Вход назначения &quot;OLE DB&quot;]"
+              name="Выход источника &quot;OLE DB&quot;"
+              startId="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee.Outputs[Выход источника &quot;OLE DB&quot;]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--В данном разделе CDATA содержатся сведения о макете пакета. В данном разделе содержатся сведения о координатах (x,y), ширине и высоте.-->
+<!--В случае возникновения ошибки при редактировании этого раздела вручную его можно удалить. -->
+<!--Пакет можно загрузить обычным образом, но прежние сведения о макете будут утеряны, и конструктор автоматически перераспределит элементы в области конструктора.-->
+<Objects
+  Version="8">
+  <!--Все приведенные ниже узлы будут содержать свойства, не влияющие на поведение среды выполнения.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="358.4,41.6"
+          Id="Package\Insert 10 records into dboSwimmers from dboDimEmployees"
+          TopLeft="137.999994516373,70.0266672231886" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Insert 10 records into dboSwimmers from dboDimEmployees">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee"
+          TopLeft="132,22.4" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer"
+          TopLeft="147.2,147.2" />
+        <EdgeLayout
+          Id="Package\Insert 10 records into dboSwimmers from dboDimEmployees.Paths[Выход источника &quot;OLE DB&quot;]"
+          TopLeft="205.4,64">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83.2"
+              Start="0,0"
+              End="0,75.7">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.7" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert 10 records into dboSwimmers from dboDimEmployees\dimEmployee">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert 10 records into dboSwimmers from dboDimEmployees\Swimmer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

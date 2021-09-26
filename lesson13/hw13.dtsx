@@ -1,0 +1,1092 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/22/2021 11:25:50 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-O9GHNJ64"
+  DTS:CreatorName="LAPTOP-O9GHNJ64\Asus"
+  DTS:DTSID="{C42317CA-3953-402C-8706-1776D2D6FAA1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.121"
+  DTS:LocaleID="1049"
+  DTS:ObjectName="hw13"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{7A250802-287F-41C1-98F6-8AB480D7A740}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.AdventureWorksDW2017]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C8659161-6DB8-441F-A03E-C177C5C24A91}"
+      DTS:ObjectName="LAPTOP-O9GHNJ64\SQLEXPRESS.AdventureWorksDW2017">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LAPTOP-O9GHNJ64\SQLEXPRESS;Initial Catalog=AdventureWorksDW2017;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BE0216AF-6579-4D0D-BA8A-578EB2F41E3D}"
+      DTS:ObjectName="LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LAPTOP-O9GHNJ64\SQLEXPRESS;Initial Catalog=bi_course;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{6CE09218-0F71-4944-84B4-20F9DDF8605C}"
+      DTS:ObjectName="Диспетчер соединений Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\Downloads\10records.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 1]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{7E1074A1-2763-4923-B8F6-E1CC09016F4E}"
+      DTS:ObjectName="Диспетчер соединений Excel 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\Downloads\10records.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 10]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{823D7F3F-AFBF-4CAE-8B03-BF743D6283C8}"
+      DTS:ObjectName="Диспетчер соединений Excel 10">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Asus\Desktop\10records.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 2]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{FE544DEB-EC3E-4575-9F5B-6E00CB2FADF2}"
+      DTS:ObjectName="Диспетчер соединений Excel 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\Downloads\10records.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 3]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{19B79FBB-C85F-4846-AC07-A359CB39FAE3}"
+      DTS:ObjectName="Диспетчер соединений Excel 3">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\Downloads\Untitled spreadsheet.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 4]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{3D36AA8D-EAED-4A9A-AC5A-7408DC27A204}"
+      DTS:ObjectName="Диспетчер соединений Excel 4">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Asus\Desktop\10records.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 5]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{2A4FA4D7-2E98-4751-9D4E-52088706FEA3}"
+      DTS:ObjectName="Диспетчер соединений Excel 5">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\Downloads\Untitled spreadsheet.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 6]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B8204E34-9DE4-4FEB-8211-0781302385BE}"
+      DTS:ObjectName="Диспетчер соединений Excel 6">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Asus\Desktop\10records.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 7]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{48A7CB21-3E5B-4CFD-A3C7-B4E10F5C3854}"
+      DTS:ObjectName="Диспетчер соединений Excel 7">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Asus\Desktop\10records.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 8]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0E0A2C70-BF15-4CF7-8C5C-2AE3FF15C83D}"
+      DTS:ObjectName="Диспетчер соединений Excel 8">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\Downloads\test123.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Диспетчер соединений Excel 9]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{7198A20A-5AEC-4492-BAD1-DE51EE089E31}"
+      DTS:ObjectName="Диспетчер соединений Excel 9">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Asus\Desktop\10records.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\insert 10 records into dboRace from excel file"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Задача потока данных"
+      DTS:DTSID="{BCB66050-AA78-47FA-9524-93050A9EF770}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert 10 records into dboRace from excel file"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Уточняющий запрос;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;6"
+              description="Присоединяет дополнительные столбцы к потоку данных путем поиска значений в таблице. Пример: соединение со столбцом &quot;employee id&quot; таблицы employees позволяет получить значения &quot;hire date&quot; и &quot;employee name&quot;. Рекомендуется воспользоваться этим преобразованием, если таблица подстановки не помещается в памяти."
+              name="Checking CompetitionIDs"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Задает инструкцию SQL, которая формирует таблицу уточняющих запросов."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Competition]</property>
+                <property
+                  dataType="System.String"
+                  description="Задает инструкцию SQL, которая использует параметры для формирования таблицы уточняющих запросов."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Competition]) [refTable]
+where [refTable].[competitionname] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает тип соединения, используемого для доступа к эталонному набору данных."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает тип кэша таблицы уточняющих запросов."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает, как преобразование &quot;Уточняющий запрос&quot; обрабатывает строки без совпадающих элементов в эталонном наборе данных."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает долю кэша (в процентах), выделенную для строк без совпадающих элементов в эталонном наборе данных."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Максимальный объем памяти для кэша ссылок на 32-разрядной платформе."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Максимальный объем памяти для кэша ссылок на 64-разрядной платформе."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает, следует ли ссылаться на метаданные в формате XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StartDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EndDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="competitionname" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Задает список идентификаторов журнала обращений и преобразований, сопоставляемый с параметрами, которые использует инструкция SQL в свойстве SQLCommand. Элементы списка разделяются точками с запятой."
+                  name="ParameterMap">#{Package\insert 10 records into dboRace from excel file\Источник "Excel".Outputs[Выход источника "Excel"].Columns[competition]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Определяет, должны ли повторяющиеся ключи в ссылочных данных обрабатываться как ошибки при использовании режима полного кэширования."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  description="Диспетчер соединений, используемый для доступа к данным уточняющих запросов."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]"
+                  name="Ввод преобразования &quot;Уточняющий запрос&quot;">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;].Columns[competition]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="competition"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[competition]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Указывает в ссылочной таблице столбец, который соединен с данным столбцом."
+                          name="JoinToReferenceColumn">competitionname</property>
+                        <property
+                          dataType="System.Null"
+                          description="Указывает в ссылочной таблице столбец, из которого копируется данный столбец."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;]"
+                  errorOrTruncationOperation="Уточняющий запрос"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Вывод совпадений преобразования &quot;Уточняющий запрос&quot;"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;].Columns[CompetitionID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Копировать столбец"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;].Columns[CompetitionID]"
+                      name="CompetitionID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Указывает в ссылочной таблице столбец, из которого копируется данный столбец."
+                          name="CopyFromReferenceColumn">id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Выход несовпадающих строк уточняющего запроса]"
+                  description="Вывод преобразования &quot;Уточняющий запрос&quot;, которое обрабатывает строки без совпадающих элементов в эталонном наборе данных. Используйте этот выход, если свойство NoMatchBehavior имеет значение &quot;Отправить строки без совпадающих элементов в выход несовпадающих строк&quot;."
+                  exclusionGroup="1"
+                  name="Выход несовпадающих строк уточняющего запроса"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Вывод ошибок преобразования &quot;Уточняющий запрос&quot;"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Уточняющий запрос;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;6"
+              description="Присоединяет дополнительные столбцы к потоку данных путем поиска значений в таблице. Пример: соединение со столбцом &quot;employee id&quot; таблицы employees позволяет получить значения &quot;hire date&quot; и &quot;employee name&quot;. Рекомендуется воспользоваться этим преобразованием, если таблица подстановки не помещается в памяти."
+              name="Checking SwimmingTypeIDs"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Задает инструкцию SQL, которая формирует таблицу уточняющих запросов."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[SwimmingType]</property>
+                <property
+                  dataType="System.String"
+                  description="Задает инструкцию SQL, которая использует параметры для формирования таблицы уточняющих запросов."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[SwimmingType]) [refTable]
+where [refTable].[Name] = ? and [refTable].[Distance] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает тип соединения, используемого для доступа к эталонному набору данных."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает тип кэша таблицы уточняющих запросов."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает, как преобразование &quot;Уточняющий запрос&quot; обрабатывает строки без совпадающих элементов в эталонном наборе данных."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает долю кэша (в процентах), выделенную для строк без совпадающих элементов в эталонном наборе данных."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Максимальный объем памяти для кэша ссылок на 32-разрядной платформе."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Максимальный объем памяти для кэша ссылок на 64-разрядной платформе."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает, следует ли ссылаться на метаданные в формате XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Distance" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Задает список идентификаторов журнала обращений и преобразований, сопоставляемый с параметрами, которые использует инструкция SQL в свойстве SQLCommand. Элементы списка разделяются точками с запятой."
+                  name="ParameterMap">#{Package\insert 10 records into dboRace from excel file\13:invalid};#{Package\insert 10 records into dboRace from excel file\17:invalid};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Определяет, должны ли повторяющиеся ключи в ссылочных данных обрабатываться как ошибки при использовании режима полного кэширования."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  description="Диспетчер соединений, используемый для доступа к данным уточняющих запросов."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]"
+                  name="Ввод преобразования &quot;Уточняющий запрос&quot;">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;].Columns[distance]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="distance"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[distance]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Указывает в ссылочной таблице столбец, который соединен с данным столбцом."
+                          name="JoinToReferenceColumn">Distance</property>
+                        <property
+                          dataType="System.Null"
+                          description="Указывает в ссылочной таблице столбец, из которого копируется данный столбец."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;].Columns[swimmingtype]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="swimmingtype"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[swimmingtype]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Указывает в ссылочной таблице столбец, который соединен с данным столбцом."
+                          name="JoinToReferenceColumn">Name</property>
+                        <property
+                          dataType="System.Null"
+                          description="Указывает в ссылочной таблице столбец, из которого копируется данный столбец."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;]"
+                  errorOrTruncationOperation="Уточняющий запрос"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Вывод совпадений преобразования &quot;Уточняющий запрос&quot;"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;].Columns[SwimmingTypeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Копировать столбец"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;].Columns[SwimmingTypeID]"
+                      name="SwimmingTypeID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Указывает в ссылочной таблице столбец, из которого копируется данный столбец."
+                          name="CopyFromReferenceColumn">id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Выход несовпадающих строк уточняющего запроса]"
+                  description="Вывод преобразования &quot;Уточняющий запрос&quot;, которое обрабатывает строки без совпадающих элементов в эталонном наборе данных. Используйте этот выход, если свойство NoMatchBehavior имеет значение &quot;Отправить строки без совпадающих элементов в выход несовпадающих строк&quot;."
+                  exclusionGroup="1"
+                  name="Выход несовпадающих строк уточняющего запроса"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Вывод ошибок преобразования &quot;Уточняющий запрос&quot;"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод ошибок преобразования &quot;Уточняющий запрос&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\insert 10 records into dboRace from excel file\Inserting into Race"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Назначение &quot;OLE DB&quot;;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;4"
+              description="Назначение &quot;OLE DB&quot;"
+              name="Inserting into Race"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Время ожидания команды, в секундах. Величина 0 означает неограниченное время ожидания."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowset">[dbo].[Race]</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает переменную, содержащую имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Команда SQL для выполнения."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Вызывает безусловное использование значение свойства DefaultCodePage при описании символьных данных."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает используемый режим доступа к базе данных."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Указывает, должны ли значения в столбцах идентификаторов копироваться в назначение. Если свойство имеет значение false, значения в столбцах идентификаторов будут созданы автоматически в месте назначения. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Указывает, будут ли в назначение вставляться значения NULL для столбцов, содержащих их. Значение false показывает, что если столбец имеет значение NULL, то в назначение будет вставлено его значение по умолчанию. Применяется только в случае, если включена быстрая загрузка."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Задает параметры быстрой загрузки. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Задает, когда выдаются сообщения о фиксации транзакции в ходе вставки данных. Значение 0 задает, что по окончании вставки данных будет выдано одно сообщение о фиксации транзакции. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-O9GHNJ64\SQLEXPRESS.bi_course]"
+                  description="Соединение OLE DB среды выполнения, используемое для доступа к базе данных."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;]"
+                  errorOrTruncationOperation="Вставить"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Вход назначения &quot;OLE DB&quot;">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[CompetitionID]"
+                      cachedDataType="i4"
+                      cachedName="CompetitionID"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CompetitionID]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;].Columns[CompetitionID]" />
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[SwimmingTypeID]"
+                      cachedDataType="i4"
+                      cachedName="SwimmingTypeID"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[SwimmingTypeID]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;].Columns[SwimmingTypeID]" />
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[timeslot]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="timeslot"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[TimeSlot]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[timeslot]" />
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[peakviewership]"
+                      cachedDataType="r8"
+                      cachedName="peakviewership"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PeakViewership]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[peakviewership]" />
+                    <inputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[totaluniqueviews]"
+                      cachedDataType="r8"
+                      cachedName="totaluniqueviews"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[TotalUniqueViews]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[totaluniqueviews]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CompetitionID]"
+                      dataType="i4"
+                      name="CompetitionID" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[SwimmingTypeID]"
+                      dataType="i4"
+                      name="SwimmingTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[TimeSlot]"
+                      dataType="wstr"
+                      length="250"
+                      name="TimeSlot" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PeakViewership]"
+                      dataType="i4"
+                      name="PeakViewership" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[TotalUniqueViews]"
+                      dataType="i4"
+                      name="TotalUniqueViews" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Вывод ошибок назначения &quot;OLE DB&quot;"
+                  synchronousInputId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Источник &quot;Excel&quot;;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;1"
+              description="Источник &quot;Excel&quot;"
+              name="Источник &quot;Excel&quot;"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Время ожидания команды, в секундах. Величина 0 означает неограниченное время ожидания."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowset">test1$</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает переменную, содержащую имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Команда SQL для выполнения."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Переменная, содержащая команду SQL для выполнения."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает используемый режим доступа к базе данных."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Сопоставление между параметрами в команде SQL и переменными."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Диспетчер соединений Excel 10]"
+                  connectionManagerRefId="Package.ConnectionManagers[Диспетчер соединений Excel 10]"
+                  description="Соединение OLE DB среды выполнения, используемое для доступа к базе данных."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;]"
+                  name="Выход источника &quot;Excel&quot;">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[competition]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[competition]"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[competition]"
+                      name="competition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[swimmingtype]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[swimmingtype]"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[swimmingtype]"
+                      name="swimmingtype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[distance]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[distance]"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[distance]"
+                      name="distance"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[timeslot]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[timeslot]"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[timeslot]"
+                      name="timeslot"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[peakviewership]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[peakviewership]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[peakviewership]"
+                      name="peakviewership"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[totaluniqueviews]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[totaluniqueviews]"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].Columns[totaluniqueviews]"
+                      name="totaluniqueviews"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[competition]"
+                      dataType="wstr"
+                      length="255"
+                      name="competition" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[swimmingtype]"
+                      dataType="wstr"
+                      length="255"
+                      name="swimmingtype" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[distance]"
+                      dataType="wstr"
+                      length="255"
+                      name="distance" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[timeslot]"
+                      dataType="wstr"
+                      length="255"
+                      name="timeslot" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[peakviewership]"
+                      dataType="r8"
+                      name="peakviewership" />
+                    <externalMetadataColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;].ExternalColumns[totaluniqueviews]"
+                      dataType="r8"
+                      name="totaluniqueviews" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;]"
+                  isErrorOut="true"
+                  name="Вывод ошибок источника &quot;Excel&quot;">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[competition]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[competition]"
+                      name="competition" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[swimmingtype]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[swimmingtype]"
+                      name="swimmingtype" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[distance]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[distance]"
+                      name="distance" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[timeslot]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[timeslot]"
+                      name="timeslot" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[peakviewership]"
+                      dataType="r8"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[peakviewership]"
+                      name="peakviewership" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[totaluniqueviews]"
+                      dataType="r8"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[totaluniqueviews]"
+                      name="totaluniqueviews" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Вывод ошибок источника &quot;Excel&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\insert 10 records into dboRace from excel file.Paths[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;]"
+              endId="Package\insert 10 records into dboRace from excel file\Inserting into Race.Inputs[Вход назначения &quot;OLE DB&quot;]"
+              name="Вывод совпадений преобразования &quot;Уточняющий запрос&quot;"
+              startId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;]" />
+            <path
+              refId="Package\insert 10 records into dboRace from excel file.Paths[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;1]"
+              endId="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]"
+              name="Вывод совпадений преобразования &quot;Уточняющий запрос&quot;"
+              startId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Outputs[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;]" />
+            <path
+              refId="Package\insert 10 records into dboRace from excel file.Paths[Выход источника &quot;Excel&quot;]"
+              endId="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs.Inputs[Ввод преобразования &quot;Уточняющий запрос&quot;]"
+              name="Выход источника &quot;Excel&quot;"
+              startId="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;.Outputs[Выход источника &quot;Excel&quot;]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--В данном разделе CDATA содержатся сведения о макете пакета. В данном разделе содержатся сведения о координатах (x,y), ширине и высоте.-->
+<!--В случае возникновения ошибки при редактировании этого раздела вручную его можно удалить. -->
+<!--Пакет можно загрузить обычным образом, но прежние сведения о макете будут утеряны, и конструктор автоматически перераспределит элементы в области конструктора.-->
+<Objects
+  Version="8">
+  <!--Все приведенные ниже узлы будут содержать свойства, не влияющие на поведение среды выполнения.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="286.4,41.6"
+          Id="Package\insert 10 records into dboRace from excel file"
+          TopLeft="147.333327478833,113.013334231483" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\insert 10 records into dboRace from excel file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs"
+          TopLeft="105.333329147763,110.240000876108" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs"
+          TopLeft="215.999991416931,209.386668330723" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\insert 10 records into dboRace from excel file\Inserting into Race"
+          TopLeft="240.666657103433,324.96000234731" />
+        <EdgeLayout
+          Id="Package\insert 10 records into dboRace from excel file.Paths[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;]"
+          TopLeft="322.333324260182,250.986668330723">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.9733340165872"
+              Start="0,0"
+              End="0,66.4733340165872">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.4733340165872" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-134.68986328125,27.2366670082936,269.3797265625,12"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;"
+          TopLeft="175.999993006389,19.8933332561917" />
+        <EdgeLayout
+          Id="Package\insert 10 records into dboRace from excel file.Paths[Выход источника &quot;Excel&quot;]"
+          TopLeft="255.999993006389,61.4933332561917">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-52.6666638586258,48.7466676199167"
+              Start="0,0"
+              End="-52.6666638586258,41.2466676199167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.3733338099584" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.3733338099584"
+                    Point2="0,24.3733338099584"
+                    Point3="-4,24.3733338099584" />
+                  <mssgle:LineSegment
+                    End="-48.6666638586258,24.3733338099584" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-48.6666638586258,24.3733338099584"
+                    Point2="-52.6666638586258,24.3733338099584"
+                    Point3="-52.6666638586258,28.3733338099584" />
+                  <mssgle:LineSegment
+                    End="-52.6666638586258,41.2466676199167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\insert 10 records into dboRace from excel file.Paths[Вывод совпадений преобразования &quot;Уточняющий запрос&quot;1]"
+          TopLeft="203.333329147763,151.840000876108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="118.266662269168,57.5466674546145"
+              Start="0,0"
+              End="118.266662269168,50.0466674546145">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.7733337273072" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.7733337273072"
+                    Point2="0,28.7733337273072"
+                    Point3="4,28.7733337273072" />
+                  <mssgle:LineSegment
+                    End="114.266662269168,28.7733337273072" />
+                  <mssgle:CubicBezierSegment
+                    Point1="114.266662269168,28.7733337273072"
+                    Point2="118.266662269168,28.7733337273072"
+                    Point3="118.266662269168,32.7733337273072" />
+                  <mssgle:LineSegment
+                    End="118.266662269168,50.0466674546145" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-75.5565321466659,33.7733337273072,269.3797265625,12"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\insert 10 records into dboRace from excel file\Checking CompetitionIDs">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Competition]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\insert 10 records into dboRace from excel file\Checking SwimmingTypeIDs">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[SwimmingType]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\insert 10 records into dboRace from excel file\Inserting into Race">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\insert 10 records into dboRace from excel file\Источник &quot;Excel&quot;">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
