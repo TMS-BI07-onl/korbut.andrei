@@ -1,0 +1,44 @@
+--TASK 1
+SELECT TOP (50) DENSE_RANK() OVER (ORDER BY calctest.[Total points] desc) as [Rank], CoachName, CoachSurname, [Total points]
+FROM 
+(
+SELECT TOP (50) [Total points earned for 1st places]+[Total points earned for 2nd places]+[Total points earned for 3rd place] as [Total points], 
+CoachName, CoachSurname
+FROM 
+(select CoachID, CoachName, CoachSurname, count(place) as [Number of first places], (count(place))*3 as [Total points earned for 1st places]
+from (select c.FirstName as CoachName, c.LastName as CoachSurname, raceid, swimmerid, time, dense_rank() over (partition by raceID ORDER BY time) as place, c.id as CoachID
+from dbo.result r
+	join dbo.Swimmer s on s.id=r.SwimmerID
+	join coach c on c.id=s.id) b
+where [place] = 1
+group by b.CoachID,  CoachName, CoachSurname) a 
+JOIN
+(select CoachID, count(place) as [Number of first places], (count(place))*2 as [Total points earned for 2nd places]
+from (select raceid, swimmerid, time, dense_rank() over (partition by raceID ORDER BY time) as place, c.id as CoachID
+from dbo.result r
+	join dbo.Swimmer s on s.id=r.SwimmerID
+	join coach c on c.id=s.id) b
+where [place] = 2
+group by b.CoachID) b ON a.coachid=b.coachid
+JOIN
+(select CoachID, count(place) as [Number of first places], (count(place)) as [Total points earned for 3rd place]
+from (select raceid, swimmerid, time, dense_rank() over (partition by raceID ORDER BY time) as place, c.id as CoachID
+from dbo.result r
+	join dbo.Swimmer s on s.id=r.SwimmerID
+	join coach c on c.id=s.id) b
+where [place] = 3
+group by b.CoachID) c ON c.coachid=b.coachid
+ORDER BY [Total points] desc
+) calctest
+
+--TASK 2
+--A
+--Удалить легенду, удалить заливку фона диаграммы и общую заливку, удалить описание осей и оставить только название диаграммы.
+
+--B
+--Можно поменять тип диаграммы на Pie-chart, чтобы нагляднее было видно сравнение. 
+Либо поменять диаграмму на столбчатую, убрать приставку (in billions) и добавить b к каждой цифре, сделать разные столбцы разными цветами.
+
+--C 
+--Поменять тип на линейный график.
+--Либо в текущем, поменять описание дат на горизонтальное, сделать название диаграммы жирным.
