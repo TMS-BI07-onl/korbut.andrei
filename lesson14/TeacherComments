@@ -1,0 +1,7 @@
+Well done!
+
+-2
+Wow, your solution is so heavy. It would better to just have all 3 places in one query and choose points by case.
+Why you needed to apply top 50 on both levels of select?
+
+Mark: 8
