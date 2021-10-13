@@ -1,0 +1,78 @@
+
+--1
+--Покажите всех менеджеров, которые имеют в подчинении больше 6-ти сотрудников.
+SELECT First_name, Last_name, COUNT(Employee_id) 
+FROM Employees
+GROUP BY First_name, Last_name
+HAVING COUNT(Employee_id) > 6
+
+select c.FirstName, c.LastName, count(s.id)
+from Swimmer s 
+	join Coach c ON s.CoachID=c.id
+group by  c.FirstName, c.LastName
+having count(s.id) > 6
+
+--2
+--Вывести min и max зарплату с вычетом commission_pct для каждого департамента.
+--(commission_pct на базе указывается в процентах). 
+SELECT (MIN(Salary) OVER (PARTITION BY Department_id)* (Comission_PCT * 100)), (MAX(Salary) OVER (PARTITION BY Department_id)* (Comission_PCT * 100))
+FROM Employees
+
+--3
+--Вывести только регион, где работают больше всего людей.
+SELECT TOP 1 WITH TIES COUNT(Employee_id) as [NumberOfEmployees], Region_name
+FROM Employees
+	JOIN Departments
+	JOIN Locations
+	JOIN Countries
+	JOIN Regions 
+GROUP BY Region_name
+ORDER BY COUNT(Employee_id) desc
+--or
+SELECT Region_name
+FROM 
+(
+	SELECT MAX[NumberOfEmployees] as max, [NumberOfEmployees], Region_name
+	FROM
+	(
+		SELECT COUNT(Employee_id) as [NumberOfEmployees], Region_name
+		FROM Employees
+		JOIN Departments
+		JOIN Locations
+		JOIN Countries
+		JOIN Regions 
+		GROUP BY Region_name
+		) a
+) b
+WHERE max = [NumberOfEmployees]
+
+--4
+--Найдите разницу в процентах между средней зп по каждому департаменту от общей средней (по всем департаментам).
+--4/1
+SELECT DISTINCT Department_id, ( AVG(Salary) OVER () - AVG(Salary) OVER (PARTITION BY Department_id) ) * 100 as discrepancy
+FROM Employees 
+--4/2
+SELECT Department_id, 
+( SELECT    AVG(Salary) as [Total Avg]
+      FROM      race r) as [Total avg],
+	  AVG(Salary) as [Per comp], 
+( ( SELECT AVG(Salary) FROM Employees) - AVG(Salary) ) * 100 as [Discrepancy]
+FROM    Employees
+GROUP BY Department_id
+
+--5
+--Найдите людей, кто проработал больше, чем 10 лет в одном департаменте. 
+SELECT first_name, last_name 
+FROM Employees
+WHERE [Hire_date] < DATEADD(year, -10, getdate())
+
+--6
+--Найдите людей, кто занимает 5-10 место по размеру зарплаты.  
+
+SELECT first_name, last_name
+FROM 
+(
+SELECT first_name, last_name, DENSE_RANK() OVER (ORDER BY SALARY desc) as [rank]
+FROM Employees
+) b
+WHERE [rank] BETWEEN 5 AND 10
