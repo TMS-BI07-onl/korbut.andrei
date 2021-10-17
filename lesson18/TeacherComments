@@ -1,0 +1,25 @@
+Well done!
+
+1.-1
+In your solution you're grouping by employees name, not by managers.
+Correct answer:
+SELECT man.first_name, man.cast_name, COUNT(emp.employee_id) as cnt_of_emp
+FROM employees man JOIN employees emp ON man.employee_id=emp.manager_id
+GROUP BY man.first_name, man.cast_name
+HAVING COUNT(emp.employee_id)>6
+
+2.-0.5
+What is the need to use window functions?
+Also you calculated the value of comission, you need to divide it from the salary.
+
+3.
+Second solution won't work. You don't have group by in the second subquery.
+
+4. 
+Some problems with calculating percentage. :)
+... (AVG(salary) OVER (PARTITION BY department_id)/AVG(salary) OVER ())*100 AS diff_pct...
+
+5. -1.5
+You have the whole job_history table for this purpose.
+
+Mark: 7
